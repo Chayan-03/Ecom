@@ -1,3 +1,0 @@
-PLatzi fake store api for products listings
-utility.css add krna hai from the github repo
-alignment shi krni hai
