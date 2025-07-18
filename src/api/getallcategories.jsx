@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const BaseUrl = 'https://api.escuelajs.co/api/v1/';
-export const GetAllProducts = async() => {
-    const url = `${BaseUrl}products`;
+export const GetAllCategories = async() => {
+    const url = `${BaseUrl}categories`;
     try{
         const {data} = await axios.get(url);
         return data;

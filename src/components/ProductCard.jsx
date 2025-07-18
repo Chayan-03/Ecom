@@ -1,8 +1,21 @@
 import React from 'react';
-
+import {useCart} from "../context/cart-context";
+import {useState} from "react";
+import {findProductInCart} from "../utility/findpageinCart";
+import {useNavigate} from "react-router-dom";
 
 
 export const ProductCard = ({product}) => {
+    const {cart,cartDispatch} = useCart();
+    const navigate = useNavigate();
+    const isProductinCard = findProductInCart(cart,product.id);
+    const cartClick=(product)=>{
+        !isProductinCard ?
+        cartDispatch({
+            type:'ADD_TO_CART',
+            payload:{product}
+        }): navigate('/cart');
+    }
     return (
             <div className="card card-vertical d-flex direction-column relative shadow">
                 <div className="card-image-container">
@@ -17,12 +30,18 @@ export const ProductCard = ({product}) => {
                         </p>
                     </div>
                     <div className="cta-btn">
-                        <button
+                        <button onClick={()=>{cartClick(product)}}
                             className="button btn-primary btn-icon cart-btn d-flex align-center justify-center gap cursor btn-margin">
                             <span className="material-icons-outlined">
-                            add_shopping_cart
+                                {
+                                    isProductinCard ? 'shopping_cart_checkout' : 'add_shopping_cart'
+                                }
+
                             </span>
-                            Add To Cart
+                            {
+                                isProductinCard ? 'Go to Cart' : 'Add To Cart'
+                            }
+
                         </button>
                         <button
                             className="button btn-primary btn-icon cart-btn d-flex align-center justify-center gap cursor btn-margin">
